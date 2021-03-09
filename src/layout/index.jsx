@@ -10,6 +10,9 @@ export default function MainLayout({ children }) {
         <meta name="description" content={config.siteDescription} />
         <html lang="en" />
       </Helmet>
+      <div>
+        <img src={`${process.env.GATSBY_API_URL}/seed/picsum/200/300`} alt="Logo" />
+      </div>
       {children}
     </div>
   );

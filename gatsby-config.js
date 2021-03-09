@@ -1,5 +1,8 @@
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
+console.log(`Using environment config: '${activeEnv}'`);
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`
+  path: `.env.${activeEnv}`,
 });
 
 const urljoin = require("url-join");
@@ -26,6 +29,18 @@ module.exports = {
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GA_TRACKING_ID,
+        // Puts tracking script in the head instead of the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+      },
+    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-lodash",
     {
